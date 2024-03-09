@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE Example</title>
+</head>
+<body>
+    <div id="sse-data"></div>
+
+    <script>
+        window.onload = function () {
+          const eventSource = new EventSource('http://127.0.0.1:8090/events');
+          eventSource.onmessage = function(event) {
+            console.log('we got the event')
+            if (event.data === "Event 15") {
+              eventSource.close()
+            }
+            // eventSource.close()
+            console.log(event)
+              const dataElement = document.getElementById('sse-data');
+              dataElement.innerHTML += event.data + '<br>';
+          };
+        }
+    </script>
+</body>
+</html>
